@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <title>MASAI CALCULATOR</title>
+        <style>
+            h1{
+                text-align: center;
+                margin-top:8%;
+                font-size: xxx-large;
+                color: rgb(13,134,133);
+            }
+            #container{
+                border: 2px solid wheat;
+                margin: auto;
+                width: 33%;
+                height: 500px;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+            }
+            .child1{
+                /* border: 1px solid blue; */
+                width: 75%;
+                height: 12%;
+                margin: auto;
+                margin-top: 10%;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            }
+            .child2{
+                /* border: 1px solid yellow; */
+                width: 75%;
+                height:65%;
+                margin: auto;
+                margin-top: 5%;
+                display: grid;
+                grid-template-columns:repeat(4,1fr);
+                grid-template-rows: repeat(4,1fr);
+                gap: 5px;
+                
+                
+            }
+            .child2>div{
+                /* border: 1px solid red; */
+                border-radius: 10px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: x-large;
+                font-weight: bolder;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            }
+            .black{
+                background-color: rgb(0,0,0);
+                color: rgb(228,228,228);
+            }
+            .red{
+                background-color: rgb(255,0,0);
+                color: rgb(228,228,228); 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Masai Calculator</h1>
+        <div id="container">
+            <div class="child1">
+                <h2 style="font-size: xx-large;"></h2>
+
+            </div>
+            <div class="child2">
+                <div class="digit">1</div>
+                <div class="digit">2</div>
+                <div class="digit">3</div>
+                <div class="black operator">+</div>
+                <div class="digit">4</div>
+                <div class="digit">5</div>
+                <div class="digit">6</div>
+                <div  class="black operator">-</div>
+                <div class="digit">7</div>
+                <div class="digit">8</div>
+                <div class="digit">9</div>
+                <div  class="black operator">x</div>
+                <div class="red" id="reload">C</div>
+                <div class="digit">0</div>
+                <div  class="black" id="EqualTo">=</div>
+                <div  class="black operator">/</div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
+<script>
+    let displayi=document.querySelector("h2")
+   
+    let digit_btn=document.querySelectorAll("#container>.child2>.digit")
+    let equalto=document.getElementById('EqualTo')
+    let reset=document.getElementById("reload")
+    let operator_btn=document.querySelectorAll('#container>.child2>.operator')
+    let con=""
+    let con2=''
+    let operator=""
+    let flag=true
+    for(let i=0;i<digit_btn.length;i++){
+        digit_btn[i].addEventListener("click",function(){
+            if(flag==true){
+                con+=digit_btn[i].innerText;
+                displayi.innerText=con;
+            }
+            else{
+                con2+=digit_btn[i].innerText
+                displayi.innerText=con2
+            }
+           
+        })
+    }
+    for(let i=0;i<operator_btn.length;i++){
+        operator_btn[i].addEventListener("click",function(){
+           flag=false
+           operator=operator_btn[i].innerText
+           
+        })
+        
+    }
+    function Calculator(con,con2,operator){
+        switch(operator){
+            case '+':
+                return Number(con)+Number(con2)
+             case '-':
+                return Number(con)-Number(con2)
+            case 'x':
+                return Number(con)*Number(con2)
+             case '/':
+                return Number(con)/Number(con2)
+
+                
+            
+
+        }
+    }
+    EqualTo.addEventListener('click',function(){
+        displayi.innerText=Calculator(con,con2,operator)
+        
+    })
+    reset.addEventListener("click",function(){
+        location.reload()
+    })
+    
+</script>
